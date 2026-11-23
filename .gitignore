@@ -1,0 +1,19 @@
+# Build output
+build/
+*.exe
+*.o
+*.obj
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Runtime / generated files
+trip_log.txt
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

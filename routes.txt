@@ -1,0 +1,67 @@
+# Pune Smart Bus Route Planner - network definition (C++17 project)
+# Format:
+#   STOP <id> <name>                                   (use underscores for spaces)
+#   EDGE <fromId> <toId> <distanceKm> <speedLimitKmh> <lineName>
+# Roads are undirected; the program adds both travel directions.
+# Multiple lines sharing the same stop act as transfer points.
+# NOTE: list all STOP lines before EDGE lines (the loader validates in file order).
+#
+# Nodes (stops)
+STOP 1 Pimpri
+STOP 2 Chinchwad
+STOP 3 Khadki
+STOP 4 Shivajinagar
+STOP 5 Civil_Court
+STOP 6 Swargate
+STOP 7 Vanaz
+STOP 8 Kothrud
+STOP 9 Deccan_Gymkhana
+STOP 10 PMC
+STOP 11 Pune_Station
+STOP 12 Kalyani_Nagar
+STOP 13 Ramwadi
+STOP 14 Katraj
+STOP 15 Camp
+STOP 16 Bund_Garden
+STOP 17 Viman_Nagar
+STOP 18 Kharadi
+STOP 19 Pune_Airport
+STOP 20 Hinjawadi
+STOP 21 Wakad
+STOP 22 Baner
+STOP 23 Aundh
+STOP 24 Hadapsar
+STOP 25 Magarpatta
+
+# Purple Line (Pimpri Chinchwad - Shivajinagar - Swargate)
+EDGE 1 2 3.0 40 PurpleLine
+EDGE 2 3 4.5 35 PurpleLine
+EDGE 3 4 5.0 35 PurpleLine
+EDGE 4 5 2.5 30 PurpleLine
+EDGE 5 6 2.0 30 PurpleLine
+
+# Aqua Line (Vanaz - Deccan - Civil Court - Pune Station - Ramwadi)
+EDGE 7 8 4.0 35 AquaLine
+EDGE 8 9 3.5 35 AquaLine
+EDGE 9 10 2.2 30 AquaLine
+EDGE 10 5 1.8 30 AquaLine
+EDGE 5 11 2.5 30 AquaLine
+EDGE 11 12 4.0 40 AquaLine
+EDGE 12 13 5.0 45 AquaLine
+
+# Red Line (Katraj - Swargate - Camp - Bund Garden - Kharadi - Pune Airport)
+EDGE 14 6 6.5 35 RedLine
+EDGE 6 15 2.2 30 RedLine
+EDGE 15 16 2.0 30 RedLine
+EDGE 16 17 3.2 35 RedLine
+EDGE 17 18 4.5 45 RedLine
+EDGE 18 19 4.0 50 RedLine
+
+# Green Line (Hinjawadi - Wakad - Baner - Aundh - Shivajinagar - Hadapsar)
+EDGE 20 21 4.0 40 GreenLine
+EDGE 21 22 3.5 35 GreenLine
+EDGE 22 23 3.0 35 GreenLine
+EDGE 23 4 5.5 40 GreenLine
+EDGE 4 16 5.0 40 GreenLine
+EDGE 16 24 6.0 45 GreenLine
+EDGE 24 25 3.0 40 GreenLine

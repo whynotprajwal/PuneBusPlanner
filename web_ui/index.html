@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pune Bus Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">P</div>
+        <div>
+          <h1>Pune Bus Planner</h1>
+          <p>Smart routes, fares and fleet comparison</p>
+        </div>
+      </div>
+      <div class="status-pill" id="backendStatus" data-state="loading">
+        <span class="status-dot"></span>
+        <span id="statusText">Connecting...</span>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Sections">
+      <button class="tab active" data-panel="networkPanel">Network</button>
+      <button class="tab" data-panel="planPanel">Plan Journey</button>
+      <button class="tab" data-panel="comparePanel">Compare Fleet</button>
+    </nav>
+
+    <main>
+      <section class="panel active" id="networkPanel">
+        <div class="section-heading">
+          <div>
+            <h2>Network overview</h2>
+            <p>Colour-coded lines with shared transfer stops.</p>
+          </div>
+          <button class="ghost" id="refreshNetwork" type="button">Refresh</button>
+        </div>
+
+        <div class="stats" id="stats"></div>
+        <div class="line-list" id="lineList"></div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>Available fleet</h3>
+            <span class="muted">Seats update after booking</span>
+          </div>
+          <div class="table-wrap">
+            <table id="fleetTable"></table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="planPanel">
+        <div class="section-heading">
+          <div>
+            <h2>Plan a journey</h2>
+            <p>Choose stops, time and bus type. Routing is handled by the C++ backend.</p>
+          </div>
+        </div>
+
+        <form class="card form" id="planForm">
+          <label>From
+            <select id="fromStop" required></select>
+          </label>
+          <label>To
+            <select id="toStop" required></select>
+          </label>
+          <label>Mode
+            <select id="mode">
+              <option value="1">Fastest</option>
+              <option value="2">Shortest distance</option>
+              <option value="3">Fewest transfers</option>
+            </select>
+          </label>
+          <label>Hour (0-23)
+            <input id="hour" type="number" min="0" max="23" value="9" required>
+          </label>
+          <label>Passenger
+            <select id="passenger">
+              <option value="1">Regular</option>
+              <option value="2">Student</option>
+              <option value="3">Senior</option>
+            </select>
+          </label>
+          <label>Bus
+            <select id="bus"></select>
+          </label>
+          <button class="primary" type="submit">Find route</button>
+        </form>
+
+        <div class="result-stack" id="planResult"></div>
+
+        <div class="card book-card hidden" id="bookCard">
+          <div>
+            <h3>Book this journey</h3>
+            <p class="muted">A ticket will be written to trip_log.txt.</p>
+          </div>
+          <div class="book-row">
+            <input id="passengerName" type="text" placeholder="Passenger name" maxlength="40">
+            <button class="primary" id="bookButton" type="button">Book seat</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="comparePanel">
+        <div class="section-heading">
+          <div>
+            <h2>Compare fleet</h2>
+            <p>See distance, time, transfers and fare for every bus type.</p>
+          </div>
+        </div>
+
+        <form class="card form" id="compareForm">
+          <label>From
+            <select id="compareFrom" required></select>
+          </label>
+          <label>To
+            <select id="compareTo" required></select>
+          </label>
+          <label>Mode
+            <select id="compareMode">
+              <option value="1">Fastest</option>
+              <option value="2">Shortest distance</option>
+              <option value="3">Fewest transfers</option>
+            </select>
+          </label>
+          <label>Hour (0-23)
+            <input id="compareHour" type="number" min="0" max="23" value="9" required>
+          </label>
+          <label>Passenger
+            <select id="comparePassenger">
+              <option value="1">Regular</option>
+              <option value="2">Student</option>
+              <option value="3">Senior</option>
+            </select>
+          </label>
+          <button class="primary" type="submit">Compare</button>
+        </form>
+
+        <div class="result-stack" id="compareResult"></div>
+      </section>
+    </main>
+
+    <div class="toast hidden" id="toast"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
